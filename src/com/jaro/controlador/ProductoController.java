@@ -2,7 +2,9 @@ package com.jaro.controlador;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,6 +50,22 @@ public class ProductoController extends HttpServlet {
 			break;
 		case "mostrar":
 			System.out.println("Has pulsado la opcion mostrar");
+			ProductoDAO productoDAO = new ProductoDAO();
+			List<Producto> lista = new ArrayList<Producto>();
+			try {
+				lista = productoDAO.mostrarTodosProductos();
+				for (Producto producto : lista) {
+					System.out.println(producto);
+				}
+				//Pasa la lista con el nombre de parametro listraProductos
+				request.setAttribute("listaProductos", lista);
+				requestDispatcher = request.getRequestDispatcher("/views/verProductos.jsp");
+				requestDispatcher.forward(request, response);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			break;
 
 		default:

@@ -125,16 +125,16 @@ public class ProductoDAO {
 	}
 	
 	//Obtener lista de todos los productos de la bd
-	public List<Producto> mostrarTodosProductos() {
+	public List<Producto> mostrarTodosProductos() throws SQLException {
 		//estadoOperacion = false;
-		//connection = obtenerConexion();
-		//List<Producto> listaProductos = new ArrayList<Producto>();
-		List<Producto> listaProductos = new ArrayList<>();
+		connection = obtenerConexion();
+		List<Producto> listaProductos = new ArrayList<Producto>();
+		//List<Producto> listaProductos = new ArrayList<>();
 		
 		try {
 			connection.setAutoCommit(false);
 			sql = "SELECT * FROM productos";
-			
+			statement = connection.prepareStatement(sql);	
 			//Ejecuta la query y obtiene el resultado en el objeto ResultSet
 			resultSet = statement.executeQuery(sql);
 			
@@ -144,7 +144,7 @@ public class ProductoDAO {
 				//1 porque el en la base de datos el id esta en la columna 1 de la tabla
 				producto.setId(resultSet.getInt(1));
 				producto.setNombre(resultSet.getString(2));
-				producto.setId(resultSet.getInt(3));
+				producto.setCantidad(resultSet.getInt(3));
 				producto.setPrecio(resultSet.getDouble(4));
 				producto.setFechaCrear(resultSet.getDate(5));
 				producto.setFechaActualizar(resultSet.getDate(6));
