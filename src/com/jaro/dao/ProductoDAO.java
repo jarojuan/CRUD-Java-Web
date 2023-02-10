@@ -34,7 +34,8 @@ public class ProductoDAO {
 		try {
 			//Inicio de la transaccion
 			connection.setAutoCommit(false);
-			sql = "INSERT INTO productos (id, nombre, cantidad, precio, fechaCrear, fechaActualizar) VALUES (?,?,?,?,?,?)";
+			sql = "INSERT INTO productos (id, nombre, cantidad, precio, fecha_crear, fecha_actualizar) "
+					+ "VALUES (?,?,?,?,?,?)";
 			
 			//Se prepara la query, abriendo un canal con la bd
 			statement = connection.prepareStatement(sql);
