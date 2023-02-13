@@ -18,6 +18,7 @@
 			<td>PRECIO</td>
 			<td>FECHA DE CREACIÓN</td>
 			<td>FECHA DE ACTUALIZACIÓN</td>
+			<td>ACCIONES</td>
 		</tr>
 		<!-- tags JSTL -->
 		<!-- listaProductos hace referencia a la lista que se va a recibir desde ProductoController -->
@@ -28,12 +29,17 @@
 					<a href="ProductoController?opcion=editar&id=<c:out value="${producto.id}"></c:out>">
 						<c:out value="${producto.id}"></c:out>
 					</a>
-			</td>
+				</td>
 				<td><c:out value="${producto.nombre}"></c:out></td>
 				<td><c:out value="${producto.cantidad}"></c:out></td>
 				<td><c:out value="${producto.precio}"></c:out></td>
 				<td><c:out value="${producto.fechaCrear}"></c:out></td>
 				<td><c:out value="${producto.fechaActualizar}"></c:out></td>
+				<td>
+					<a href="ProductoController?opcion=eliminar&id=<c:out value="${producto.id}"></c:out>">
+						Eliminar
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

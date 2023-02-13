@@ -27,7 +27,7 @@ public class ProductoController extends HttpServlet {
 	private ProductoDAO productoDAO = new ProductoDAO();
 	private Producto producto = new Producto();
 	// Para indicar la fecha actual (Es de tipo java.util.Date, para pasarla a la bd se cambiará el tipo)
-	private Date fechaActual = new Date();
+	private Date fechaActual = new Date();	
 	private List<Producto> lista = new ArrayList<Producto>();
 	// Se usa para redireccionar
 	private RequestDispatcher requestDispatcher;
@@ -85,6 +85,22 @@ public class ProductoController extends HttpServlet {
 				requestDispatcher.forward(request, response);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "eliminar":
+			// Recoge el id recibido al pulsar eliminar desde verProductos.jsp
+			id = Integer.parseInt(request.getParameter("id"));
+			try {
+				productoDAO.eliminar(id);
+				System.out.println("Articulo eliminado correctamente.");
+				// Redirecciona al verProductos.jsp mostrando la lista de productos actualizada
+				lista = productoDAO.mostrarTodosProductos();
+				request.setAttribute("listaProductos", lista);
+				requestDispatcher = request.getRequestDispatcher("/views/verProductos.jsp");
+				requestDispatcher.forward(request, response);
+			} catch (SQLException e) {
+				System.out.println("Error. El articulo no se ha podido eliminar");
 				e.printStackTrace();
 			}
 			break;
