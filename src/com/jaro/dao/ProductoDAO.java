@@ -73,7 +73,7 @@ public class ProductoDAO {
 		try {
 			//Se inicia la transaccion
 			connection.setAutoCommit(false);
-			sql = "UPDATE productos SET nombre=?, cantidad=?, precio=?, fechaActualizar=? WHERE id=?";
+			sql = "UPDATE productos SET nombre=?, cantidad=?, precio=?, fecha_actualizar=? WHERE id=?";
 			statement = connection.prepareStatement(sql);
 			//Al pasar los parametros, se debe seguir el orden (de ?) que tienen en la query
 			statement.setString(1, producto.getNombre());
@@ -187,7 +187,7 @@ public class ProductoDAO {
 				//1 porque el en la base de datos el id esta en la columna 1 de la tabla
 				producto.setId(resultSet.getInt(1));
 				producto.setNombre(resultSet.getString(2));
-				producto.setId(resultSet.getInt(3));
+				producto.setCantidad(resultSet.getInt(3));
 				producto.setPrecio(resultSet.getDouble(4));
 				producto.setFechaCrear(resultSet.getDate(5));
 				producto.setFechaActualizar(resultSet.getDate(6));

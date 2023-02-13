@@ -23,7 +23,12 @@
 		<!-- listaProductos hace referencia a la lista que se va a recibir desde ProductoController -->
 		<c:forEach var="producto" items="${listaProductos}">
 			<tr>			
-				<td><c:out value="${producto.id}"></c:out></td>
+				<td>
+					<!-- Al pulsar en el enlace (el id) se pasa al controlador la opcion editar y el id pulsado -->
+					<a href="ProductoController?opcion=editar&id=<c:out value="${producto.id}"></c:out>">
+						<c:out value="${producto.id}"></c:out>
+					</a>
+			</td>
 				<td><c:out value="${producto.nombre}"></c:out></td>
 				<td><c:out value="${producto.cantidad}"></c:out></td>
 				<td><c:out value="${producto.precio}"></c:out></td>
